@@ -1,6 +1,6 @@
 # ChatGPTerm
 
-A simple TUI that acts as a simple wrapper to the ChatGPT. Written in rust.
+A simple TUI that acts as a simple wrapper to the ChatGPT API. Written in rust.
 
 ## How to use
 You'll need an API key from OpenAI. You can generate one [here](https://platform.openai.com/account/api-keys).
