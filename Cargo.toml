@@ -1,0 +1,19 @@
+[package]
+name = "chatgpterm"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dotenvy = "0.15.6"
+openai = "1.0.0-alpha.6"
+owo-colors = "3.5.0"
+reqwest = "0.11.14"
+termimad = "0.23.0"
+tokio = { version = "1.26.0", features = ["macros", "tokio-macros", "rt-multi-thread"] }
+
+[profile.release]
+strip = true
+lto = true
+codegen-units = 1
