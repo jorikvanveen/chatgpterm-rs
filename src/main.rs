@@ -1,6 +1,6 @@
-use std::io::*;
 use openai::{chat::*, models::ModelID};
 use owo_colors::OwoColorize;
+use std::io::*;
 use termimad;
 
 #[tokio::main]
@@ -13,17 +13,17 @@ async fn main() {
     for prompt in stdin.lock().lines() {
         let prompt = match prompt {
             Ok(prompt) => prompt,
-            Err(..) => continue
+            Err(..) => continue,
         };
 
         let message = ChatCompletionMessage {
             role: ChatCompletionMessageRole::User,
             content: prompt,
-            name: None
+            name: None,
         };
 
         messages.push(message);
-        
+
         // Make openai request
         let response = ChatCompletionBuilder::default()
             .model(ModelID::Gpt3_5Turbo)
@@ -33,7 +33,10 @@ async fn main() {
 
         let (response_message, token_count) = match response {
             Ok(response) => match response {
-                Ok(response) => (response.choices[0].message.content.clone(), response.usage.unwrap().total_tokens),
+                Ok(response) => (
+                    response.choices[0].message.content.clone(),
+                    response.usage.unwrap().total_tokens,
+                ),
                 Err(e) => {
                     println!("An error occurred: {:#?}", e.message.red());
                     do_prompt();
@@ -48,7 +51,7 @@ async fn main() {
         };
 
         let cost_cents = token_count as f64 * 0.0002;
-        
+
         // Display response
         termimad::print_inline(&response_message);
         print!("\n");
